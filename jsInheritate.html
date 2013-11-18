@@ -1,0 +1,138 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		function add(a,b)
+		{
+			add.invokeTimes++;
+			return a + b;
+		}
+		add.invokeTimes = 0;
+		add(1+1);
+		add(2+3);
+		console.log(add.invokeTimes);
+		function Person(name,sex)
+		{
+			this.name = name;
+			this.sex = sex;
+		}
+		Person.prototype = {
+			getName: function(){
+				return this.name;
+			},
+			getSex: function(){
+				return this.sex;
+			}
+		};
+		var li = new Person("lichao","man");
+		console.log(li.getName() + "  "+li.getSex());
+		console.log(this == window);
+		console.log(window.alert == this.alert);
+		console.log(this.parseInt("021",10));
+		function foo()
+		{
+			console.log(this.fruit);
+		}
+		var fruit = "apple";
+		foo();
+		var pack = {
+			fruit : "orange",
+			foo : foo
+		};
+		pack.foo();
+		pack.foo.apply(window);
+		foo.apply(window);
+		foo.apply(pack);
+		function goo(){
+			if (this == window){
+				console.log("This is window.");
+			}
+		}
+		goo.boo = function(){
+			if (this == goo){
+				console.log("This is foo.");
+			}else if (this == window){
+				console.log("This is window.");
+			}
+		}
+		goo();
+		goo.boo();
+		goo.boo.apply(window);
+
+		Array.prototype.min = function(){
+			var min = this[0];
+			for(var i=1;i<this.length;i++){
+				if(this[i] < min){
+					min = this[i];
+				}
+			}
+			return min;
+		}
+		console.log("----------------------");
+		var arr = [1,56,34,12];
+		console.log(arr.min());
+		for(var i in arr){
+			console.log(i);
+		}
+		console.log("----------------------");
+		for(var i in arr){
+			if(arr.hasOwnProperty(i)){
+				console.log(i);
+			}
+		}
+		console.log("----------------------");
+		console.log(arr.constructor == Array);
+
+		var p = new Person("beibei","woman");
+		console.log(p.constructor == Person);
+		console.log(p.constructor == Object);
+		console.log("----------------------");
+		function Person(){
+
+		}
+		Person.prototype = {
+			init : function(name){
+				this.name = name;
+			},
+			getName : function() {
+				return this.name;
+			}
+		};
+		function Employee(){
+
+		}
+		Employee.prototype = new Person();
+		Employee.prototype.constructor = Employee;
+		Employee.prototype.init =  function(name,employeeID) {
+			this.name = name;
+			this.employeeID = employeeID;
+		};
+		Employee.prototype.getEmplyeeID = function(){
+			return this.employeeID;
+		};
+		var zhang = new Employee();
+		zhang.init("ZhangSan","1234");
+		console.log(zhang.getName());
+		console.log(zhang.getEmplyeeID());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>
