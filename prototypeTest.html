@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>call/apply/prototype test</title>
+</head>
+<script type="text/javascript">
+	//定义学生类（姓名、学好、年龄）
+	function student(name, no, age) {
+		this.name = name;
+		this.no = no;
+		this.age = age;
+	}
+	//学生实例
+	var captain = new student("captain", "06281097", 21);
+	//添加学校属性
+	student.prototype.school = null;
+	//为captain学生的学校属性赋值
+	captain.school = "BJTU";
+	//显示captain的学校
+	document.write(captain.school);
+<script>
+<body>
+</body>
+</html>

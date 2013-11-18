@@ -1,0 +1,55 @@
+<html>
+<head>
+	<meta charset="utf-8">
+</head>
+<body>
+<script type="text/javascript">
+	//person类
+	function person(name, age) {
+		this.name = name;
+		this.age = age;
+	}
+
+	//student类，继承自person(call)
+	function student(name, age, no) {
+		person.call(this, name, age);
+		this.no = no;
+	}
+
+	//programer类，继承自person(prototype)
+	function programer(name, age, sex) {
+		this.sex = sex;
+	}
+	programer.prototype = new person();
+
+	//man类，继承自person(prototype)
+	function man(name, age, height) {
+		person.call(this, name, age);
+		this.height = height;
+		this
+	}
+	man.prototype.say = function() {
+		alert(this.name);
+	};
+
+	
+	//创建person实例
+	var p = new person("captain", 21);
+	//创建student实例
+	var s = new student("captain", 21, "06281097");
+	//创建programer实例
+	var g = new programer("captain", 21, "男");
+	//创建man实例
+	var m = new man("captain", 21, 176);
+
+	//判断类型(typeof返回全是object，所以用instanceof)
+	alert(s instanceof person);//false 使用call并不是完全的继承
+	alert(s instanceof student);//true
+	alert(g instanceof person);//true 
+	alert(g instanceof programer);//true
+	alert(m instanceof person);//false 
+	//只有使用prototype添加父类的构造函数,才能在意义上完全继承person
+	alert(m instanceof man);//true
+<script>
+</body>
+</html>
